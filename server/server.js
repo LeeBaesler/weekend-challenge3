@@ -1,21 +1,15 @@
-const pg = require('pg');
+const express = require('express');
+const app = express();
 
-const config = {
-    database: 'weekend-to-do-app',
-    host: 'localhost',
-    port: 5432,
-    max: 10,
-    idleTimeoutMillis: 30000
-};
+app.use(express.urlencoded({extended: true}));
 
-const pool = new pg.Pool(config);
+// static files 
+app.use(express.static('server/public'));
 
-pool.on("connect", () => {
-    console.log("connected to postgres");
-  });
-  
-  pool.on("error", (err) => {
-    console.log("error connecting to postgres", err);
-  });
-  
-  module.exports = pool;
+const tasksRouter = require('/routes/tasks.router.js');
+app.use('/tasks', tasksRouter);
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, ()=> {
+    console.log('listening on port', PORT);
+});
