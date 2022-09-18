@@ -1,15 +1,14 @@
 $(document).ready(function(){
     console.log('jQuery sourced.');
     refreshTasks();
-    addClickHandlers()
+    addClickHandlers();
   });
 
   function addClickHandlers() {
     $('#submitBtn').on('click', submitButton);
     $('#taskList').on('click', '.delete-button', deleteButton);
-    $('#taskList').on('click', '.tasks-button', handleTasks);
+    $('#taskList').on('click', '.task-button', handleTasks);
   }
-  
 
   
   function handleTasks(event) {
@@ -79,31 +78,31 @@ function refreshTasks(){
     }
 
 
+
   //display tasks to DOM
-  function fetchTasks(animal) {
+  function fetchTasks(tasks) {
     $('#taskList').empty();
 
-    for(let i = 0; i < animal.length; i += 1) {
-        let animal = tasks[i];
+    for(let i = 0; i < tasks.length; i += 1) {
+        let task = tasks[i];
     // append new task to the DOM 
     $('#taskList').append(`
-    <tr data-tasksid = ${animal.id}>
-    <td>${animal.creator}</td>
-    <td>${animal.date_created}</td>
-    <td> ${animal.task}</td>
+    <tr data-tasksid = ${task.id}>
+    <td>${task.creator}</td>
+    <td>${task.date_created}</td>
+    <td> ${task.task}</td>
         <td>
-          ${animal.completed ? 'yes' : 'no'}
           <button class='task-button'
-            data-tasksid='${animal.id}'
-          >${animal.completed ? 'Mark unread' : 'Mark read'}</button>
+            data-tasksid='${task.id}'
+          >${task.completed ? 'Finished' : 'Unfinished'}</button>
       </td>
         <td>
           <button 
             class='delete-button'
-            data-tasksid='${animal.id}'
+            data-tasksid='${task.id}'
           >delete</button>
       </tr>
     `);
-    console.log("hello", animal);
+    console.log("hello", task);
   }
 }
