@@ -1,9 +1,56 @@
 $(document).ready(function(){
     console.log('jQuery sourced.');
+    refreshTasks();
+    addClickHandlers()
   });
 
+  function addClickHandlers() {
+    $('#submitBtn').on('click', submitButton);
+    $('#taskList').on('click', '.delete-button', deleteButton);
+    $('#taskList').on('click', '.tasks-button', handleTasks);
+  }
+  
+
+  
+  function handleTasks(event) {
+     // ask the button for the tasks id
+    const tasksid = $(event.target).data('tasksid');
+    $.ajax({
+      method: 'PUT',
+      url: `/tasks/${tasksid}`
+    }).then(() => {
+      refreshTasks()
+    }).catch(err => {
+      console.log(err)
+    });
+  }
+
+
+  //delete on specific button clicked which will have id of
+  //the book that we want to delete. 
+  function deleteButton(event){
+    const tasksid = $(event.target).data('tasksid');
+    $.ajax ({
+        method: 'DELETE',
+        url: `/tasks/${tasksid}`
+    }).then(()=>{
+    refreshTasks()
+    }).catch(err =>{
+        console.log(err)
+    })
+    }
+
+  function submitButton(){
+    console.log('submit button clicked.');
+    let tasks = {};
+    tasks.creator = $("#creator").val();
+    tasks.date_created = $("#date_created").val();
+    tasks.task = $("#task").val();
+    addTask(tasks);
+  }
+
 //add tasks to postgres database
-function addtask(tasksToAdd) {
+function addTask(tasksToAdd) {
     $.ajax({
         type:'POST',
         url: 'tasks',
@@ -36,19 +83,19 @@ function refreshTasks(){
   function fetchTasks(tasks) {
     $('#taskList').empty();
 
-    for(let i = 0; i < tasks.length; i += 1) {
-        let tasks = tasks[i];
+    for(let i = 0; i < task.length; i += 1) {
+        let task = tasks[i];
     // append new task to the DOM 
     $('#taskList').append(`
     <tr>
-        <td>${tasks.creator}</td>
-        <td>${tasks.date_created}</td>
-        <td> ${tasks.task}</td>
+        <td>${task.creator}</td>
+        <td>${task.date_created}</td>
+        <td> ${task.task}</td>
         <td>
-          ${tasks.completed ? 'yes' : 'no'}
+          ${task.completed ? 'yes' : 'no'}
           <button class='task-button'
-            data-tasksid='${tasks.id}'
-          >${tasks.completed ? 'Mark unread' : 'Mark read'}</button>
+            data-tasksid='${task.id}'
+          >${task.completed ? 'Mark unread' : 'Mark read'}</button>
       </td>
         <td>
           <button 

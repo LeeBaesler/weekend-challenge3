@@ -21,11 +21,11 @@ router.get('/', (req, res) => {
 // and it completed (boolean)
 router.post('/', (req,res) => {
     let newTask = req.body;
-    console.log('Adding book', newTask);
+    console.log('Adding tasks', newTask);
 
-    let queryText = `INSERT INTO "tasks" ("creator", "date_created", "task", "completed")
-                    VALUES ($1, $2, $3, $4);`;
-    pool.query(queryText, [newTask.creator, newTask.date_created, newTask.task, newTask.completed])
+    let queryText = `INSERT INTO "tasks" ("creator", "date_created", "task")
+                    VALUES ($1, $2, $3);`;
+    pool.query(queryText, [newTask.creator, newTask.date_created, newTask.task])
         .then(result => {
             res.sendStatus(201);
         })

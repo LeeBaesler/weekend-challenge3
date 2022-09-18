@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/LeeBaesler/weekend-challenge3#readme",
   "dependencies": {
+    "@popperjs/core": "^2.11.6",
+    "bootstrap": "^5.2.1",
     "express": "^4.18.1",
     "pg": "^8.8.0"
   }
