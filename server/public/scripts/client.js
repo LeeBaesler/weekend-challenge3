@@ -80,30 +80,30 @@ function refreshTasks(){
 
 
   //display tasks to DOM
-  function fetchTasks(tasks) {
+  function fetchTasks(animal) {
     $('#taskList').empty();
 
-    for(let i = 0; i < task.length; i += 1) {
-        let task = tasks[i];
+    for(let i = 0; i < animal.length; i += 1) {
+        let animal = tasks[i];
     // append new task to the DOM 
     $('#taskList').append(`
-    <tr>
-        <td>${task.creator}</td>
-        <td>${task.date_created}</td>
-        <td> ${task.task}</td>
+    <tr data-tasksid = ${animal.id}>
+    <td>${animal.creator}</td>
+    <td>${animal.date_created}</td>
+    <td> ${animal.task}</td>
         <td>
-          ${task.completed ? 'yes' : 'no'}
+          ${animal.completed ? 'yes' : 'no'}
           <button class='task-button'
-            data-tasksid='${task.id}'
-          >${task.completed ? 'Mark unread' : 'Mark read'}</button>
+            data-tasksid='${animal.id}'
+          >${animal.completed ? 'Mark unread' : 'Mark read'}</button>
       </td>
         <td>
           <button 
             class='delete-button'
-            data-tasksid='${tasks.id}'
+            data-tasksid='${animal.id}'
           >delete</button>
       </tr>
     `);
-    console.log("hello", tasks);
+    console.log("hello", animal);
   }
 }
