@@ -11,6 +11,14 @@ h3{
     text-align: center;
 }
 
+.completed {
+    background-color: orange;
+}
+
+.notCompleted {
+    background-color: red;
+}
+
 label {
     font-style: italic;
 	color: yellow;

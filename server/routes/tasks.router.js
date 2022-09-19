@@ -35,8 +35,8 @@ router.post('/', (req,res) => {
         });
 });
 
-router.delete('/taskid', (req,res)=> {
-    const taskid = req.params.tasksid;
+router.delete('/:taskid', (req,res)=> {
+    const taskid = req.params.taskid;
 
     const queryText = `DELETE FROM "tasks" WHERE id=$1;`;
     pool.query(queryText, [taskid])
@@ -60,9 +60,6 @@ router.put('/:taskid', (req, res)=> {
         res.sendStatus(500)
     });
 });
-
-
-
 
 module.exports = router;
 

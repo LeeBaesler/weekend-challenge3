@@ -61,7 +61,7 @@ function addTask(tasksToAdd) {
         refreshTasks();
     }).catch(function(error){
         console.log('Error in POST', error)
-        alert('Unable to add task at this time. P{lease try again laster.');
+        alert('Unable to add task at this time. Please try again laster.');
     });
     }
 
@@ -74,12 +74,11 @@ function refreshTasks(){
     }).then (function(response){
         console.log(response);
         fetchTasks(response);
+        
     }).catch(function(error){
         console.log('error in GET', error);
     });
     }
-
-
 
   //display tasks to DOM
   function fetchTasks(tasks) {
@@ -88,11 +87,16 @@ function refreshTasks(){
     for(let i = 0; i < tasks.length; i += 1) {
         let task = tasks[i];
 
-      
+      let className = 'completed'
+
+        if (task.completed === false){
+          className ='notCompleted'
+        }
       console.log(task.completed)
     // append new task to the DOM 
     $('#taskList').append(`
-    <tr data-tasksid = ${task.id}>
+    <tr data-tasksid=${task.id} class=${className}>
+
     <td>${task.creator}</td>
     <td>${task.date_created}</td>
     <td> ${task.task}</td>
@@ -100,6 +104,7 @@ function refreshTasks(){
           <button class='task-button'
             data-tasksid='${task.id}'
           >${task.completed ? 'Finished' : 'Unfinished'}</button>
+          
       </td>
         <td>
           <button 
@@ -109,10 +114,5 @@ function refreshTasks(){
       </tr>
     `);
     console.log("hello", task);
-  }
-  if (task.completed === false){
-    $('#tastList').css('background-color', 'red')
-  } else {
-    $('#tastList').css('background-color', 'orange')
   }
 }
