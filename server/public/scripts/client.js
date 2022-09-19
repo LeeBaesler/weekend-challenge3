@@ -106,12 +106,11 @@ function refreshTasks(){
           >delete</button>
       </tr>
     `);
-    if (task.completed === false){
-      $('#tastList').css('background-color', 'red')
-    } else {
-      $('#tastList').css('background-color', 'orange')
-    }
-    
     console.log("hello", task);
+  }
+  if (task.completed === false){
+    $('#tastList').css('background-color', 'red')
+  } else {
+    $('#tastList').css('background-color', 'orange')
   }
 }
