@@ -85,6 +85,9 @@ function refreshTasks(){
 
     for(let i = 0; i < tasks.length; i += 1) {
         let task = tasks[i];
+
+      
+      console.log(task.completed)
     // append new task to the DOM 
     $('#taskList').append(`
     <tr data-tasksid = ${task.id}>
@@ -103,6 +106,12 @@ function refreshTasks(){
           >delete</button>
       </tr>
     `);
+    if (task.completed === false){
+      $('#tastList').css('background-color', 'red')
+    } else {
+      $('#tastList').css('background-color', 'orange')
+    }
+    
     console.log("hello", task);
   }
 }
