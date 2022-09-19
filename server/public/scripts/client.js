@@ -2,6 +2,7 @@ $(document).ready(function(){
     console.log('jQuery sourced.');
     refreshTasks();
     addClickHandlers();
+    swal ("CONGRATULATIONS", '... you made it!!')
   });
 
   function addClickHandlers() {
@@ -46,6 +47,7 @@ $(document).ready(function(){
     tasks.date_created = $("#date_created").val();
     tasks.task = $("#task").val();
     addTask(tasks);
+   
   }
 
 //add tasks to postgres database
